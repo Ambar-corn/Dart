@@ -16,6 +16,11 @@ class DecimalCounter {
       {int minValue = 3, int maxValue = 87}) {
     // code
     int otherValue = currentValue;
+    if (currentValue < minValue) {
+      otherValue = minValue;
+    } else if (currentValue > maxValue) {
+      otherValue = maxValue;
+    }
     return DecimalCounter._(otherValue, maxValue, minValue);
   }
 
@@ -37,19 +42,13 @@ class DecimalCounter {
 }
 
 void main() {
-  DecimalCounter counter = DecimalCounter(5);
+  DecimalCounter counter = DecimalCounter(100);
   print(counter._currentValue);
-  // counter.decrement();
-  // print(counter._currentValue);
-  // counter.decrement();
   counter.decrement();
   counter.decrement();
   print(counter._currentValue);
-
   counter.decrement();
   print(counter._currentValue);
-
   counter.decrement();
-
   print(counter._currentValue);
 }
