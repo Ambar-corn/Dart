@@ -7,7 +7,6 @@
 // значение числа Пи из класса MathUtils. Результат расчета площади округлите
 //до 2-х знаков после запятой.
 
-import 'dart:ffi';
 import 'dart:math';
 
 class MathUtils {
