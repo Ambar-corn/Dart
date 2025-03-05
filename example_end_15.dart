@@ -68,6 +68,9 @@ class Scale {
     //code
     return products.fold<Product>(products[0],
         (min, current) => min.price < current.price ? min : current);
+
+    //if (products.isEmpty) return null;
+    //return products.reduce((min, current) => min.price < current.price ? min : current);
   }
 
   Product? getMaxWeightProduct() {
