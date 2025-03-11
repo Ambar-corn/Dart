@@ -15,7 +15,7 @@ class OverVolume implements Exception {
 class Book {
   String name;
   String author;
-  int publication;
+  DateTime publication;
   double weight;
   double cost;
   int width;
@@ -26,6 +26,11 @@ class Book {
       this.width, this.height, this.thickness);
   int volume() {
     return width * height * thickness;
+  }
+
+  @override
+  String toString() {
+    return "Название: $name, Автор: $author, Год: $publication, Стоимость: $cost";
   }
 }
 
@@ -61,6 +66,11 @@ class Section {
     books.add(book);
   }
 
+  void removeBook(String nameBook, String nameAuthor) {
+    books.removeWhere(
+        (book) => book.name == nameBook && book.author == nameAuthor);
+  }
+
   double totalCostSection() {
     return books.fold<double>(
         0.0, (initialValue, book) => initialValue + book.cost);
@@ -68,6 +78,18 @@ class Section {
 
   List<Book> authorSearch(String name) {
     return books.where((book) => book.author == name).toList();
+  }
+
+  List<Book> searchMinCost(double minCost) {
+    return books.where((book) => book.cost >= minCost).toList();
+  }
+
+  List<Book> searchRange(DateTime startTime, DateTime endTime) {
+    return books
+        .where((book) =>
+            !book.publication.isAfter(endTime) &&
+            !book.publication.isBefore(startTime))
+        .toList();
   }
 
   @override
@@ -98,6 +120,18 @@ class Bookshelf {
     return sections.expand((section) => section.authorSearch(name)).toList();
   }
 
+  List<Book> minCostGlobal(double minCost) {
+    return sections
+        .expand((section) => section.searchMinCost(minCost))
+        .toList();
+  }
+
+  List<Book> searchGlobalRange(DateTime startTime, DateTime endTime) {
+    return sections
+        .expand((section) => section.searchRange(startTime, endTime))
+        .toList();
+  }
+
   @override
   String toString() {
     // TODO: implement toString
@@ -106,27 +140,24 @@ class Bookshelf {
 }
 
 void main() {
-  Book book1 = Book("name", "author2", 1293, 3, 32, 2, 1, 4);
-  Book book2 = Book("name1", "author1", 123, 0.5, 2, 1, 1, 4);
-  Book book3 = Book("name2", "autho2r", 123333, 0.6, 332, 3, 1, 4);
-
-  Book book4 = Book("book4", "author4", 1000, 0.4, 40, 4, 2, 5);
-  Book book5 = Book("book5", "author5", 2000, 0.5, 50, 5, 3, 6);
-  Book book6 = Book("book6", "author6", 3000, 0.6, 60, 6, 4, 7);
-  Section noName = Section(23, 100);
-  noName.addBook(book1);
-  noName.addBook(book2);
-  noName.addBook(book3);
-  noName.addBook(book4);
-  noName.totalCostSection();
-
-  Section name = Section(122, 500);
-  name.addBook(book1);
-  name.addBook(book2);
-  name.addBook(book3);
-  name.addBook(book4);
-  List<Book> a = noName.authorSearch("author2");
-  Bookshelf bookshelf = Bookshelf([name, noName]);
-  print(a[0].author);
-  print(bookshelf.totalCost());
+  Book book1 = Book("Книга 1", "Автор 1", DateTime(500), 1.0, 10.0, 10, 20, 5);
+  Book book2 = Book("Книга 2", "Автор 2", DateTime(1000), 2.0, 20.0, 15, 25, 3);
+  Book book3 = Book("Книга 3", "Автор 3", DateTime(1500), 1.5, 30.0, 12, 22, 4);
+  Book book4 = Book("Книга 4", "Автор 4", DateTime(1800), 0.8, 40.0, 14, 24, 6);
+  Book book5 = Book("Книга 5", "Автор 5", DateTime(2000), 1.2, 50.0, 13, 23, 5);
+  Book book6 = Book("Книга 6", "Автор 6", DateTime(2020), 0.9, 60.0, 11, 21, 7);
+  Section section1 = Section(10.0, 10000);
+  section1.addBook(book1); // 500
+  section1.addBook(book2); // 1000
+  section1.addBook(book3); // 1500
+  section1.addBook(book4); // 1800
+  print(section1);
+  section1.removeBook("Книга 2", "Автор 2");
+  Section section2 = Section(10.0, 10000);
+  section2.addBook(book2); // 1000
+  section2.addBook(book4); // 1800
+  section2.addBook(book5); // 2000
+  section2.addBook(book6); // 2020
+  Bookshelf bookshelf = Bookshelf([section1, section2]);
+  print(section1);
 }
