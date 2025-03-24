@@ -159,5 +159,6 @@ void main() {
   section2.addBook(book5); // 2000
   section2.addBook(book6); // 2020
   Bookshelf bookshelf = Bookshelf([section1, section2]);
+  print(bookshelf);
   print(section1);
 }
