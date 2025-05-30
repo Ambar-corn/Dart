@@ -1,0 +1,3 @@
+A Stream provides
+ a way to receive
+  a sequence of events
