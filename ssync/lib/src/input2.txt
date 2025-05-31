@@ -1,5 +1,3 @@
-that stream
- will lead the function
-  to emit
-  Строка которая должна записаться 
-  и ещё одна потому что должна
+aaa bbb 3
+asf trr ee
+dgh  vv

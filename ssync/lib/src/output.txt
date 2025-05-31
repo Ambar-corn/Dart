@@ -1,8 +1,3 @@
-A Stream provides
-that stream
- a way to receive
- will lead the function
-  a sequence of events
-  to emit
-  Строка которая должна записаться 
-  и ещё одна потому что должна
+aaa bbb 312
+aaa bbb 3dgh vv
+dgh  vv
