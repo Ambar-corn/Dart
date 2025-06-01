@@ -14,9 +14,14 @@ void main() {
 
     final Map<String, int> counts = {};
     for (String item in outSpace) {
-      counts[item] = (counts[item] ?? 0) + 1;
+      final cleaned = item.trim();
+      if (cleaned.isNotEmpty) {
+        counts[cleaned] = (counts[cleaned] ?? 0) + 1;
+      }
     }
-    output.writeAsStringSync(counts.toString());
+    String correct =
+        counts.entries.map((e) => '${e.key}:${e.value}').join('\n');
+    output.writeAsStringSync(correct);
   }
 
   youFunction();

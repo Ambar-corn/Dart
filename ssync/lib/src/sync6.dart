@@ -12,9 +12,9 @@ void main() {
     List<String> outSpace = input1.readAsStringSync().split(RegExp(r'[ \n]+'));
     List<String> uniqueWords = outSpace.toSet().toList();
 
-    output.writeAsStringSync(uniqueWords.toString());
-    print(outSpace);
-    print(uniqueWords);
+    String correct = uniqueWords.map((e) => e).join(' ');
+    output.writeAsStringSync(correct);
+    print(correct);
   }
 
   youFunction();
