@@ -12,8 +12,10 @@ void main() {
     List<String> fileFirst = input1.readAsStringSync().split("\n");
     List<String> invertion;
 
-    output.writeAsStringSync(
-        fileFirst.map((str) => str.split('').reversed.join('')).join('\n'));
+    output.writeAsStringSync(fileFirst
+        .map((str) => str.split('').reversed.join('').trim())
+        .join('\n'));
+    print('\n$fileFirst');
   }
 
   youFunction();

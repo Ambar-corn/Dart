@@ -15,11 +15,10 @@ void main() {
     List<String> fileSecond = input2.readAsStringSync().split("\n");
 
     for (int i = 0; i < fileFirst.length; i++) {
-      print(fileFirst[i].compareTo(fileSecond[i]));
       int different = fileFirst[i].compareTo(fileSecond[i]);
       if (different > 0) {
         output.writeAsStringSync('${fileFirst[i]}\n', mode: FileMode.append);
-        output.writeAsStringSync(fileSecond[i], mode: FileMode.append);
+        output.writeAsStringSync('${fileSecond[i]}\n', mode: FileMode.append);
       }
     }
   }
